@@ -1,13 +1,13 @@
 {
-   "name": "@silvermine/markdownlint-rule-list-indentation",
+   "name": "@silvermine/markdownlint-rule-ol-indent",
    "version": "0.1.0",
    "description": "A custom markdownlint rule for ordered and unordered list indentation",
-   "main": "src/list-indentation.js",
+   "main": "src/ol-indent.js",
    "scripts": {
       "check-node-version": "check-node-version --npm 8.5.5",
       "commitlint": "commitlint --from bb563e0fb7",
       "eslint": "eslint '{,!(node_modules|dist)/**/}*.js'",
-      "markdownlint": "markdownlint -c .markdownlint.json -i CHANGELOG.md '{,!(node_modules)/**/}*.md'",
+      "markdownlint": "markdownlint -r src/ol-indent.js -c .markdownlint.json -i CHANGELOG.md '{,!(node_modules)/**/}*.md'",
       "standards": "npm run commitlint && npm run markdownlint && npm run eslint",
       "test": "mocha --forbid-only ./tests/**/*.test.js",
       "release:preview": "node ./node_modules/@silvermine/standardization/scripts/release.js preview",
@@ -35,5 +35,8 @@
       "chai": "4.3.7",
       "markdownlint": "0.27.0",
       "mocha": "10.2.0"
+   },
+   "dependencies": {
+      "markdownlint-rule-helpers": "0.18.0"
    }
 }
