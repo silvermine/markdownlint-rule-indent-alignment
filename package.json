@@ -33,7 +33,10 @@
       "@silvermine/eslint-config": "3.1.0-beta.0",
       "@silvermine/standardization": "2.1.1",
       "chai": "4.3.7",
-      "markdownlint": "0.27.0",
+      "markdownlint": "0.29.0",
       "mocha": "10.2.0"
+   },
+   "dependencies": {
+      "markdownlint-rule-helpers": "0.20.0"
    }
 }
