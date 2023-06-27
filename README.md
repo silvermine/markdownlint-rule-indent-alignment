@@ -1,8 +1,8 @@
-# markdownlint-rule-list-indentation
+# markdownlint-rule-indent-alignment
 
 <!-- markdownlint-disable line-length -->
-[![NPM Version](https://img.shields.io/npm/v/@silvermine/markdownlint-rule-list-indentation.svg)](https://www.npmjs.com/package/@silvermine/markdownlint-rule-list-indentation)
-[![License](https://img.shields.io/github/license/silvermine/markdownlint-rule-list-indentation.svg)](./LICENSE)
+[![NPM Version](https://img.shields.io/npm/v/@silvermine/markdownlint-rule-indent-alignment.svg)](https://www.npmjs.com/package/@silvermine/markdownlint-rule-indent-alignment)
+[![License](https://img.shields.io/github/license/silvermine/markdownlint-rule-indent-alignment.svg)](./LICENSE)
 [![Conventional Commits](https://img.shields.io/badge/Conventional%20Commits-1.0.0-yellow.svg)](https://conventionalcommits.org)
 <!-- markdownlint-enable line-length -->
 
@@ -26,14 +26,16 @@ the alignment of list items and blocks (e.g. code blocks). For example:
 To use this custom markdownlint rule two things needed:
 
    1. Update your [markdownlint config][markdownlint-config] to include
-      `"list-indention": true`
+      `"indent-alignment": true`
    2. Add this rule to the list of [custom markdownlint rules][custom-rules-config].
       If using [markdownlint-cli](https://github.com/igorshubovych/markdownlint-cli), this
       would look something like:
 
+      <!-- markdownlint-disable line-length -->
       ```bash
-      markdownlint -r './node_modules/@silvermine/markdownlint-rule-list-indention/src/list-indention.js' -c .markdownlint.json README.md
+      markdownlint -r './node_modules/@silvermine/markdownlint-rule-indent-alignment/src/indent-alignment.js' -c .markdownlint.json README.md
       ```
+      <!-- markdownlint-enable line-length -->
 
 ## Rule configuration
 

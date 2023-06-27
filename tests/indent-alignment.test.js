@@ -3,9 +3,9 @@
 const { expect } = require('chai');
 
 const { markdownlint } = require('markdownlint').promises,
-      listIndentation = require('../src/list-indentation');
+      indentAlignment = require('../src/indent-alignment');
 
-describe('List Indentation', () => {
+describe('Indent Alignment', () => {
 
    async function runTest(lines, ruleConfig = true) {
       const text = lines.join('\n') + '\n';
@@ -13,9 +13,9 @@ describe('List Indentation', () => {
       return markdownlint({
          config: {
             default: false,
-            'list-indentation': ruleConfig,
+            'indent-alignment': ruleConfig,
          },
-         customRules: [ listIndentation ],
+         customRules: [ indentAlignment ],
          strings: {
             text,
          },
