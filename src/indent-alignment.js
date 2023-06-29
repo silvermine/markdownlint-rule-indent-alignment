@@ -53,10 +53,10 @@ function getReadableNameOfTokenForError(token) {
 
 module.exports = {
 
-   names: [ 'list-indentation' ],
-   description: 'Ordered and unordered list indentation',
-   information: new URL('https://github.com/silvermine/markdownlint-rule-list-indentation'),
-   tags: [ 'bullet', 'ul', 'il', 'indentation' ],
+   names: [ 'indent-alignment' ],
+   description: 'Indent alignment of list items, wrapped lines, and blocks',
+   information: new URL('https://github.com/silvermine/markdownlint-rule-indent-alignment'),
+   tags: [ 'bullet', 'ul', 'il', 'indentation', 'paragraph' ],
 
    'function': function listIndentation(params, onError) {
       // Ensure top-level blocks and paragraphs are not indented
