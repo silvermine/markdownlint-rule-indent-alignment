@@ -964,6 +964,21 @@ describe('Indent Alignment', () => {
       ]);
    });
 
+   it('reports no errors for indented lists inside double blockquotes', async () => {
+      await testValidExample([
+         '>> hello',
+         '>>',
+         '>>   * test',
+         '>>   * test',
+         '>>',
+         '>> test',
+         '>>',
+         '>>  1. test',
+         '>>  2. test',
+         '>>  3. test',
+      ]);
+   });
+
    it('reports no errors for left-aligned paragraphs', async () => {
       await testValidExample([
          'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',

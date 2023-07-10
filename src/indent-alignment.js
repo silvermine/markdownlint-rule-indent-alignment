@@ -119,11 +119,21 @@ module.exports = {
 
       // Ensure blocks are aligned
       traverse(params.parsers.micromark.tokens, [ 'blockQuote', 'listOrdered', 'listUnordered' ], (token) => {
-         const iterateOverChildTokens = [ 'blockQuote', 'codeFenced', 'content', 'listItemPrefix', 'listOrdered', 'listUnordered' ],
-               firstToken = findFirstTokenOfType(token.children, [ 'content' ]);
+         let iterateOverChildTokens = [ 'codeFenced', 'content', 'listItemPrefix', 'blockQuote', 'listOrdered', 'listUnordered' ];
+
+         const firstToken = findFirstTokenOfType(token.children, [ 'content' ]);
 
          if (!firstToken) {
             return;
+         }
+
+         // This rule does not enforce a specific initial indentation of list items
+         // since that behavior is handled by rules like MD007. Therefore, ignore any
+         // list tokens that are the direct children of blockQuote tokens.
+         // We also ignore nested blockQuotes because the checks below are not written
+         // to handle that edge case.
+         if (token.type === 'blockQuote') {
+            iterateOverChildTokens = [ 'codeFenced', 'content', 'listItemPrefix' ];
          }
 
          let expectedIndent = firstToken.startColumn - 1; // -1 to make zero indexed
