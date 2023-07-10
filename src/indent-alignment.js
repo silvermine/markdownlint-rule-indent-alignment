@@ -86,6 +86,7 @@ module.exports = {
             'link',
             'literalAutolink',
             'strong',
+            'htmlText',
          ];
 
          const firstToken = findFirstTokenOfType(token.children, inlineTextLikeTokens);

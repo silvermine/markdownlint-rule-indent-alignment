@@ -1034,6 +1034,20 @@ describe('Indent Alignment', () => {
       ]);
    });
 
+   it('reports no errors for multi-line html tags', async () => {
+      await testValidExample([
+         '<a class="this is a long attribute which needs to be wrapped"',
+         'href="#">This query</a>',
+         'testing',
+      ]);
+
+      await testValidExample([
+         '<div class="this is a long attribute which needs to be wrapped">',
+         '   Lorem ipsum dolor sit amet',
+         '</div>',
+      ]);
+   });
+
    it('reports errors for incorrect indention of item under long ol list item prefixes', async () => {
       const oneHundredItemList = Array.from({ length: 10 }, (_, index) => {
          return `${index + 1}. item ${index + 1}`;
