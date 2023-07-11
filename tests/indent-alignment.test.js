@@ -964,6 +964,21 @@ describe('Indent Alignment', () => {
       ]);
    });
 
+   it('reports no errors for indented lists inside double blockquotes', async () => {
+      await testValidExample([
+         '>> hello',
+         '>>',
+         '>>   * test',
+         '>>   * test',
+         '>>',
+         '>> test',
+         '>>',
+         '>>  1. test',
+         '>>  2. test',
+         '>>  3. test',
+      ]);
+   });
+
    it('reports no errors for left-aligned paragraphs', async () => {
       await testValidExample([
          'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
@@ -1031,6 +1046,20 @@ describe('Indent Alignment', () => {
          '101. item 101',
          '',
          '     > blockquote under item 101',
+      ]);
+   });
+
+   it('reports no errors for multi-line html tags', async () => {
+      await testValidExample([
+         '<a class="this is a long attribute which needs to be wrapped"',
+         'href="#">This query</a>',
+         'testing',
+      ]);
+
+      await testValidExample([
+         '<div class="this is a long attribute which needs to be wrapped">',
+         '   Lorem ipsum dolor sit amet',
+         '</div>',
       ]);
    });
 
