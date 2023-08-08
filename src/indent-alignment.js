@@ -75,6 +75,27 @@ module.exports = {
          );
       });
 
+      // Ensure top-level lists adhere to the start_indent setting if it`s defined
+      if (params.config.start_indent !== undefined) {
+         iterate(params.parsers.micromark.tokens, [ 'listOrdered', 'listUnordered' ], (token) => {
+            const startColumn = token.startColumn - 1;
+
+            addErrorDetailIf(
+               onError,
+               token.startLine,
+               params.config.start_indent,
+               startColumn,
+               `Top-level ${getReadableNameOfTokenForError(token)} should be indented ${params.config.start_indent} spaces.`,
+               undefined,
+               [ 1, Math.max(startColumn, 1) ],
+               {
+                  deleteCount: startColumn,
+                  insertText: ' '.repeat(token.startColumn - 1),
+               }
+            );
+         });
+      }
+
       // Ensure all text lines within a paragraph are aligned
       traverse(params.parsers.micromark.tokens, [ 'paragraph' ], (token) => {
          const inlineTextLikeTokens = [

@@ -435,6 +435,14 @@ describe('Indent Alignment', () => {
          '    * second-level list item (+2 offset)',
       ]);
       await testInvalidExample([
+         '* first-level list item (-3 offset)',
+         '   * second-level list item',
+      ], { 'ul_indent': 3, 'start_indent': 3 });
+      await testInvalidExample([
+         '1. first-level list item (-3 offset)',
+         '   * second-level list item',
+      ], { 'start_indent': 3 });
+      await testInvalidExample([
          '* first-level list item',
          ' * second-level list item (-1 offset)',
       ], { 'ul_indent': 3 });
@@ -543,7 +551,7 @@ describe('Indent Alignment', () => {
          '     wrapped line for the second-level list item',
          '      * third-level list item',
          '        wrapped line for the third-level list item',
-      ], { 'ul_indent': 3 });
+      ], { 'ul_indent': 3, 'start_indent': 0 });
    });
 
    it('reports errors for non-left-aligned list items', async () => {
@@ -627,7 +635,7 @@ describe('Indent Alignment', () => {
          '     wrapped item ending with **bold**',
          '   * placeholder text',
          '     **bold** starting wrapped item',
-      ], { 'ul_indent': 3 });
+      ], { 'ul_indent': 3, 'start_indent': 0 });
    });
 
    it('reports errors for improperly aligned lists with inline_code', async () => {
@@ -664,7 +672,7 @@ describe('Indent Alignment', () => {
          '      wrapped item ending with `code`',
          '   * placeholder text',
          '      `code` starting wrapped item',
-      ], { 'ul_indent': 3 });
+      ], { 'ul_indent': 3, 'start_indent': 3 });
    });
 
    it('reports errors for improperly aligned lists with bold text', async () => {
@@ -701,7 +709,7 @@ describe('Indent Alignment', () => {
          '      wrapped item ending with **bold**',
          '   * placeholder text',
          '      **bold** starting wrapped item',
-      ], { 'ul_indent': 3 });
+      ], { 'ul_indent': 3, 'start_indent': 3 });
    });
 
    it('reports errors for improperly aligned lists with italicized text', async () => {
@@ -738,7 +746,7 @@ describe('Indent Alignment', () => {
          '      wrapped item ending with _italic_',
          '   * placeholder text',
          '      _italic_ starting wrapped item',
-      ], { 'ul_indent': 3 });
+      ], { 'ul_indent': 3, 'start_indent': 3 });
    });
 
    it('reports no errors for indented lists', async () => {
@@ -753,7 +761,7 @@ describe('Indent Alignment', () => {
       await testValidExample([
          '   * first list item',
          '      * sub-list item',
-      ], { 'ul_indent': 3 });
+      ], { 'ul_indent': 3, 'start_indent': 3 });
       await testValidExample([
          '   1. first list item',
          '   1. second list item',
@@ -761,7 +769,7 @@ describe('Indent Alignment', () => {
       await testValidExample([
          '   1. first list item',
          '      1. sub-list item',
-      ]);
+      ], { 'start_indent': 3 });
    });
 
    it('reports no errors for properly aligned code blocks', async () => {
