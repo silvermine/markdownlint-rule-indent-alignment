@@ -60,6 +60,22 @@ This rule has the following config options:
               * sub-item
            ```
 
+   * `start_indent`: Desired indention of all top-level lists (`number`, default
+     `undefined`)
+      * By default, top-level lists are allowed to be indented at any level as long as
+        it's consistent. When `start_indent` is set, then any top-level list must be
+        indented at that level.
+      * Examples:
+         * `start_indent: 3`
+
+           ```text
+              * top-level item
+                * sub-item
+
+              1. top-level item
+                 1. sub-item
+           ```
+
 [markdownlint-config]: https://github.com/DavidAnson/markdownlint#optionsconfig
 [custom-rules-config]: https://github.com/DavidAnson/markdownlint#optionscustomrules
 [md007]: https://github.com/DavidAnson/markdownlint/blob/main/doc/md007.md
