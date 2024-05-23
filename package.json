@@ -1,6 +1,6 @@
 {
    "name": "@silvermine/markdownlint-rule-indent-alignment",
-   "version": "0.1.0",
+   "version": "0.1.1",
    "description": "A custom markdownlint rule to ensure the proper alignment of indented content",
    "main": "src/indent-alignment.js",
    "scripts": {
