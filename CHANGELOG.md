@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [our coding standards][commit-messages] for commit guidelines.
 
+### [0.1.1](https://github.com/silvermine/markdownlint-rule-indent-alignment/compare/v0.1.0...v0.1.1) (2024-05-23)
+
+
+### Features
+
+* ensure top-level lists are linted according to 'start_indent' ([9363d16](https://github.com/silvermine/markdownlint-rule-indent-alignment/commit/9363d160c99829c59f314d7e8c26336ae90a2b62))
+
+
 ## 0.1.0 (2023-07-17)
 
 
