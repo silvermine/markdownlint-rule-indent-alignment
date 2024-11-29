@@ -1069,6 +1069,13 @@ describe('Indent Alignment', () => {
          '   Lorem ipsum dolor sit amet',
          '</div>',
       ]);
+
+      await testValidExample([
+         '<a',
+         'href="#">',
+         '   link text',
+         '</a>',
+      ]);
    });
 
    it('reports errors for incorrect indention of item under long ol list item prefixes', async () => {

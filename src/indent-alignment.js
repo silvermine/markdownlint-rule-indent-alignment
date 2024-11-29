@@ -8,7 +8,11 @@ function traverse(tokens, nodeTypes, iterateeFn) {
          iterateeFn(token);
       }
 
-      if (token.children) {
+      // Avoid linting HTML blocks because the commonmark spec does not define the proper
+      // parent/child structure that would be needed to validate blocks of html text. For
+      // example, a div that's inside another div is still considered a sibling by the
+      // commonmark standard. See also: https://spec.commonmark.org/0.31.2/#html-blocks
+      if (token.children && token.type !== 'htmlFlow') {
          traverse(token.children, nodeTypes, iterateeFn);
       }
    });
@@ -22,6 +26,24 @@ function iterate(tokens, nodeTypes, iterateeFn) {
          skipTo = undefined;
       }
 
+      // If an HTML tag spans multiple lines, and is not considered a "starting condition"
+      // it will be parsed as part of a paragraph instead of an HTML block. For example:
+      // ```md
+      // <a
+      // href="">this text is inside a paragraph.</a>
+      //
+      // <a href="">this text is inside a block of HTML.</a>
+      // ```
+      // See "starting condition" for more details:
+      // https://spec.commonmark.org/0.31.2/#html-blocks
+      //
+      // Since we want to avoid linting any HTML content, we skip any tokens that appear
+      // on the same line as `htmlText`. Note that if we did not do this, any text before
+      // or after `htmlText` could be inaccurately flagged by this rule.
+      if (token.type === 'htmlText') {
+         skipTo = 'lineEnding';
+      }
+
       const isSkippingTokens = skipTo !== undefined,
             visitRequested = !nodeTypes || nodeTypes.includes(token.type);
 
@@ -33,9 +55,14 @@ function iterate(tokens, nodeTypes, iterateeFn) {
    });
 }
 
-function findFirstTokenOfType(tokens, nodeTypes) {
+function findFirstNonHTMLTokenOfType(tokens, nodeTypes) {
+   let skipLine;
+
    return (tokens || []).find((token) => {
-      return nodeTypes.includes(token.type);
+      if (token.type === 'htmlText') {
+         skipLine = token.endLine;
+      }
+      return nodeTypes.includes(token.type) && token.startLine !== skipLine;
    });
 }
 
@@ -57,6 +84,7 @@ module.exports = {
    description: 'Indent alignment of list items, wrapped lines, and blocks',
    information: new URL('https://github.com/silvermine/markdownlint-rule-indent-alignment'),
    tags: [ 'bullet', 'ul', 'il', 'indentation', 'paragraph' ],
+   parser: 'micromark',
 
    'function': function listIndentation(params, onError) {
       // Ensure top-level blocks and paragraphs are not indented
@@ -107,10 +135,9 @@ module.exports = {
             'link',
             'literalAutolink',
             'strong',
-            'htmlText',
          ];
 
-         const firstToken = findFirstTokenOfType(token.children, inlineTextLikeTokens);
+         const firstToken = findFirstNonHTMLTokenOfType(token.children, inlineTextLikeTokens);
 
          if (!firstToken) {
             return;
@@ -142,7 +169,7 @@ module.exports = {
       traverse(params.parsers.micromark.tokens, [ 'blockQuote', 'listOrdered', 'listUnordered' ], (token) => {
          let iterateOverChildTokens = [ 'codeFenced', 'content', 'listItemPrefix', 'blockQuote', 'listOrdered', 'listUnordered' ];
 
-         const firstToken = findFirstTokenOfType(token.children, [ 'content' ]);
+         const firstToken = findFirstNonHTMLTokenOfType(token.children, [ 'content' ]);
 
          if (!firstToken) {
             return;
