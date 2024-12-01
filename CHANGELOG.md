@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [our coding standards][commit-messages] for commit guidelines.
 
+## [0.2.0](https://github.com/silvermine/markdownlint-rule-indent-alignment/compare/v0.1.1...v0.2.0) (2024-12-01)
+
+
+### Bug Fixes
+
+* add micromark parser to markdownlint config ([3f05e92](https://github.com/silvermine/markdownlint-rule-indent-alignment/commit/3f05e92fc44e4febca25be9bfa6bd3d822898758))
+
+
 ### [0.1.1](https://github.com/silvermine/markdownlint-rule-indent-alignment/compare/v0.1.0...v0.1.1) (2024-05-23)
 
 
