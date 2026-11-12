@@ -4,7 +4,7 @@
    "description": "A custom markdownlint rule to ensure the proper alignment of indented content",
    "main": "src/indent-alignment.js",
    "scripts": {
-      "check-node-version": "check-node-version --npm 10.5.0",
+      "check-node-version": "check-node-version --npm 11.19.1",
       "commitlint": "commitlint --from bb563e0fb7",
       "eslint": "eslint '{,!(node_modules|dist)/**/}*.js'",
       "markdownlint": "markdownlint-cli2",
@@ -34,7 +34,7 @@
       "@silvermine/standardization": "2.2.3",
       "chai": "4.3.7",
       "markdownlint": "0.36.1",
-      "mocha": "10.2.0"
+      "mocha": "11.8.0"
    },
    "dependencies": {
       "markdownlint-rule-helpers": "0.20.0"
