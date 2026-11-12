@@ -34,7 +34,7 @@
       "@silvermine/standardization": "2.2.3",
       "chai": "4.3.7",
       "markdownlint": "0.36.1",
-      "mocha": "10.2.0"
+      "mocha": "11.8.0"
    },
    "dependencies": {
       "markdownlint-rule-helpers": "0.20.0"
